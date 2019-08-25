@@ -1,6 +1,6 @@
 # laravel-wsl
 
-The script and instructions below will setup an environment for Laravel development on your Windows Systems for Linux.
+Bootstrap script to configure a Laravel development environment on Windows Systems for Linux.
 
 **Shout-Out**: Some of the instructions here and the tasks for the bootstrap script were taken from this nice [tutorial](https://dev-squared.com/2018/05/15/getting-started-with-laravel-development-on-windows-subsystem-for-linux-with-vs-code-a-complete-guide/).
 
