@@ -69,7 +69,7 @@ sudo debconf-set-selections <<< "maria-db mysql-server/root_password password "
 sudo debconf-set-selections <<< "maria-db mysql-server/root_password_again password "
 
 sudo sed -i "s/bind-address.*/bind-address = 0.0.0.0/" /etc/mysql/mariadb.conf.d/50-server.cnf
-sudo service mysql restart
+sudo service mysql restart &> /dev/null
 
 MYSQL=`which mysql`
 
