@@ -22,6 +22,8 @@ Once your WSL is up and running, download the bootstrap script and run it on you
 6. Install and configure vim
 7. Configure xdebug
 
+**Note**: The boostrap script was tested only on a Debian WSL.
+
 ### Docroot
 
 Create a docroot where your code will exist. Since the Windows filesystem can be access from the WSL `/mnt/`, create a directory shared between the two spaces and symlinked it for your home directory in WSL.
