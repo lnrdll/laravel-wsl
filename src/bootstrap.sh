@@ -13,11 +13,13 @@ PHP="7.3"
 #
 function output ()
 {
+
 local HOSTNAME=$(hostname)
 GREEN="\e[1;32m"
 YELLOW="\e[1;33m"
 RESET="\e[0m"
 echo -e "${YELLOW}==> ${GREEN}$HOSTNAME: ${RESET}$@ ..."
+
 }
 
 #
@@ -141,7 +143,7 @@ echo "alias vi=vim" >> ~/.bashrc
 source ~/.bashrc
 
 output "Configure xdebug"
-cat >> /etc/php/$PHP/fpm/conf.d/20-xdebug.ini << EOF
+sudo cat >> /etc/php/$PHP/fpm/conf.d/20-xdebug.ini << EOF
 xdebug.default_enable=1
 xdebug.remote_enable=1
 xdebug.remote_connect_back=1
