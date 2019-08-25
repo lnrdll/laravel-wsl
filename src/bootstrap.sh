@@ -143,7 +143,7 @@ echo "alias vi=vim" >> ~/.bashrc
 source ~/.bashrc
 
 output "Configure xdebug"
-sudo cat >> /etc/php/$PHP/fpm/conf.d/20-xdebug.ini << EOF
+cat << EOF | sudo tee -a /etc/php/$PHP/fpm/conf.d/20-xdebug.ini &> /dev/null
 xdebug.default_enable=1
 xdebug.remote_enable=1
 xdebug.remote_connect_back=1
@@ -154,4 +154,4 @@ xdebug.show_local_vars=1
 xdebug.remote_autostart=1
 EOF
 
-sudo service php$PHP-fpm restart
+sudo service php$PHP-fpm restart &> /dev/null
