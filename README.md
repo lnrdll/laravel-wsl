@@ -8,7 +8,7 @@ The script and instructions below will setup an environment for Laravel developm
 
 ### Enable WSL
 
-Follow the instructions in this [documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10). Once you get WSL enabled, go ahead and install Ubuntu.
+Follow the instructions in this [documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10). Once you get WSL enabled, go ahead and install Debian.
 
 ### Bootstrap script
 
