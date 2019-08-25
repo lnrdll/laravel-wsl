@@ -74,3 +74,7 @@ To get all the VS Code goodness to work with PHP on your Windows box, you need t
 4. Install some PHP packages on your VS Code:
    * PHP Intelephense
    * PHP IntelliSense
+
+## License
+
+This project is licensed under the Apache-2.0 License - see the [LICENSE](LICENSE) file for details
