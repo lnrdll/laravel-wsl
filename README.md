@@ -1,6 +1,6 @@
 # laravel-wsl
 
-The script and instructions below will setup an environment for Laravel development on your Windows Systems for Linux.
+Bootstrap script to configure a Laravel development environment on Windows Systems for Linux.
 
 **Shout-Out**: Some of the instructions here and the tasks for the bootstrap script were taken from this nice [tutorial](https://dev-squared.com/2018/05/15/getting-started-with-laravel-development-on-windows-subsystem-for-linux-with-vs-code-a-complete-guide/).
 
@@ -8,7 +8,7 @@ The script and instructions below will setup an environment for Laravel developm
 
 ### Enable WSL
 
-Follow the instructions in this [documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10). Once you get WSL enabled, go ahead and install Ubuntu.
+Follow the instructions in this [documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10). Once you get WSL enabled, go ahead and install Debian.
 
 ### Bootstrap script
 
@@ -21,6 +21,8 @@ Once your WSL is up and running, download the bootstrap script and run it on you
 5. Install composer and valet
 6. Install and configure vim
 7. Configure xdebug
+
+**Note**: The boostrap script was tested only on a Debian WSL.
 
 ### Docroot
 
