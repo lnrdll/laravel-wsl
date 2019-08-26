@@ -75,6 +75,8 @@ To get all the VS Code goodness to work with PHP on your Windows box, you need t
    * PHP Intelephense
    * PHP IntelliSense
 
+Another options is to use the [Remote WSL](https://code.visualstudio.com/remote-tutorials/wsl/run-in-wsl) plugin for VSCode.
+
 ## License
 
 This project is licensed under the Apache-2.0 License - see the [LICENSE](LICENSE) file for details
