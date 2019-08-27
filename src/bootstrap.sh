@@ -87,36 +87,31 @@ sudo apt-get install -y redis-server &> /dev/null
 sudo service redis-server start
 
 output "Create startup script"
-cat > ~/start-services.sh << EOF
+cat > ~/ctl-services.sh << EOF
 #!/bin/bash
 
-if ps ax | grep -v grep | grep 'php-fpm' > /dev/null
-    then
-        echo 'FPM is running'
-    else
-        sudo service php$PHP-fpm start
-fi
+case "${1:-''}" in
+  'start');;
+  'stop');;
+  'restart');;
+  'status');;
+  *)
+    echo "Usage: $SELF start|stop|restart|status"
+    exit 1
+  ;;
+esac
 
-if ps ax | grep -v grep | grep 'nginx' > /dev/null
-    then
-        echo 'Nginx is running'
-    else
-        sudo service nginx start
-fi
+SERVICES=( php-fpm nginx mysql redis-server )
 
-if ps ax | grep -v grep | grep 'mysql' > /dev/null
+for i in "${SERVICES[@]}"
+do
+  if [ $i == 'php-fpm' ]
     then
-        echo 'MySQL is running'
+        sudo service php7.3-fpm $1
     else
-        sudo service mysql start
-fi
-
-if ps ax | grep -v grep | grep 'redis-server' > /dev/null
-    then
-        echo 'Redis is running'
-    else
-        sudo service redis-server start
-fi
+        sudo service $i $1
+  fi
+done
 EOF
 
 chmod +x ~/start-services.sh
