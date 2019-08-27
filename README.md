@@ -26,7 +26,7 @@ Once your WSL is up and running, download the bootstrap script and run it on you
 
 ### Docroot
 
-Create a docroot where your code will exist. Since the Windows filesystem can be access from the WSL `/mnt/`, create a directory shared between the two spaces and symlinked it from your home directory in WSL.
+Create a docroot where your code will exist. Since the Windows filesystem can be accessed from the WSL `/mnt/`, create a directory shared between the two spaces and symlinked it from your home directory in WSL.
 
 ```
 ln -s /mnt/c/Users/<username>/<code_directory> ~/code
