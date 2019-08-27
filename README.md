@@ -1,6 +1,6 @@
 # laravel-wsl
 
-Bootstrap script to configure a Laravel development environment on Windows Systems for Linux.
+Bootstrap script to configure a Laravel **development** environment on Windows Systems for Linux.
 
 **Shout-Out**: Some of the instructions here and the tasks for the bootstrap script were taken from this nice [tutorial](https://dev-squared.com/2018/05/15/getting-started-with-laravel-development-on-windows-subsystem-for-linux-with-vs-code-a-complete-guide/).
 
@@ -15,7 +15,7 @@ Follow the instructions in this [documentation](https://docs.microsoft.com/en-us
 Once your WSL is up and running, download the bootstrap script and run it on your WSL. It will perform the following tasks:
 
 1. Update Linux
-2. Install PHP 7.3 and configure it
+2. Install and configure PHP 7.3
 3. Install MariaDB
 4. Install Redis
 5. Install composer and valet
@@ -26,7 +26,7 @@ Once your WSL is up and running, download the bootstrap script and run it on you
 
 ### Docroot
 
-Create a docroot where your code will exist. Since the Windows filesystem can be access from the WSL `/mnt/`, create a directory shared between the two spaces and symlinked it for your home directory in WSL.
+Create a docroot where your code will exist. Since the Windows filesystem can be access from the WSL `/mnt/`, create a directory shared between the two spaces and symlinked it from your home directory in WSL.
 
 ```
 ln -s /mnt/c/Users/<username>/<code_directory> ~/code
