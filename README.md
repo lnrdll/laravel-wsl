@@ -62,9 +62,11 @@ composer create-project --prefer-dist laravel/laravel blog
 
 Composer will create a `blog` folder will all the boilerplate. You should be able to access it at: ``http://blog.test``.
 
-### VSCode and PHP
+### VSCode
 
-To get all the VS Code goodness to work with PHP on your Windows box, you need to download PHP and configure VS Code to use it.
+#### PHP
+
+To get all the VSCode goodness to work with PHP on your Windows box, you need to download PHP and configure VS Code to use it.
 
 1. Download PHP and explode the package somewhere on your Windows machine
 2. Edit your VS Code settings and point the `php.validate.executablePath` and `php.executablePath` settings to the path of the `php.exe` you just exploded:
@@ -73,11 +75,19 @@ To get all the VS Code goodness to work with PHP on your Windows box, you need t
 "php.executablePath":"C:\\Users\\<username>\\php\\php.exe"
 ```
 3. Restart VS Code
-4. Install some PHP packages on your VS Code:
+4. Install some PHP packages on your VSCode:
    * PHP Intelephense
    * PHP IntelliSense
 
 Another options is to use the [Remote WSL](https://code.visualstudio.com/remote-tutorials/wsl/run-in-wsl) plugin for VSCode.
+
+#### Terminal
+
+To configure the VSCode to use the WSL environment, you'll have to update the user's profile settings.
+
+* `File -> Preferences -> Settings`
+
+Then, you'll change/add the following property `"terminal.integrated.shell.windows"` to: `C:\\Windows\\Sysnative\\bash.exe`.
 
 ## License
 
