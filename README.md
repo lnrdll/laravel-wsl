@@ -103,7 +103,8 @@ To configure the VSCode to use the WSL environment, you'll have to update the us
 
 * `File -> Preferences -> Settings`
 
-Then, you'll change/add the following property `"terminal.integrated.shell.windows"` to: `C:\\Windows\\Sysnative\\bash.exe`.
+Then, you'll change/add the following property: 
+`"terminal.integrated.shell.windows": "C:\\Windows\\Sysnative\\bash.exe"`
 
 ## License
 
