@@ -70,10 +70,12 @@ To get all the VSCode goodness to work with PHP on your Windows box, you need to
 
 1. Download PHP and explode the package somewhere on your Windows machine
 2. Edit your VS Code settings and point the `php.validate.executablePath` and `php.executablePath` settings to the path of the `php.exe` you just exploded:
+
 ```
 "php.validate.executablePath":"C:\\Users\\<username>\\php\\php.exe",
 "php.executablePath":"C:\\Users\\<username>\\php\\php.exe"
 ```
+
 3. Restart VS Code
 
 Another options is to use the [Remote WSL](https://code.visualstudio.com/remote-tutorials/wsl/run-in-wsl) plugin for VSCode.
@@ -103,8 +105,11 @@ To configure the VSCode to use the WSL environment, you'll have to update the us
 
 * `File -> Preferences -> Settings`
 
-Then, you'll change/add the following property: 
-`"terminal.integrated.shell.windows": "C:\\Windows\\Sysnative\\bash.exe"`
+Then, you'll change/add the following property:
+
+```
+"terminal.integrated.shell.windows": "C:\\Windows\\Sysnative\\bash.exe"
+```
 
 ## License
 
