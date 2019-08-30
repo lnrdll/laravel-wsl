@@ -75,11 +75,27 @@ To get all the VSCode goodness to work with PHP on your Windows box, you need to
 "php.executablePath":"C:\\Users\\<username>\\php\\php.exe"
 ```
 3. Restart VS Code
-4. Install some PHP packages on your VSCode:
-   * PHP Intelephense
-   * PHP IntelliSense
 
 Another options is to use the [Remote WSL](https://code.visualstudio.com/remote-tutorials/wsl/run-in-wsl) plugin for VSCode.
+
+#### Extensions
+
+1. [advanced-new-file](https://marketplace.visualstudio.com/items?itemName=patbenatar.advanced-new-file)
+2. [Better Align](https://marketplace.visualstudio.com/items?itemName=wwm.better-align)
+3. [Better PHPUnit](https://marketplace.visualstudio.com/items?itemName=calebporzio.better-phpunit)
+4. [Bracket Pair Colorizer](https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer)
+5. [File Utils](https://marketplace.visualstudio.com/items?itemName=sleistner.vscode-fileutils)
+6. [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
+7. [Path Intellisense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense)
+8. [PHP Debug](https://marketplace.visualstudio.com/items?itemName=felixfbecker.php-debug)
+9. [PHP Intelephense](https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client)
+10. [PHP Getters & Setters](https://marketplace.visualstudio.com/items?itemName=phproberto.vscode-php-getters-setters)
+11. [PHP import checker](https://marketplace.visualstudio.com/items?itemName=marabesi.php-import-checker)
+12. [PHP Mess Detector](https://marketplace.visualstudio.com/items?itemName=ecodes.vscode-phpmd)
+13. [phpfmt - PHP formatter](https://marketplace.visualstudio.com/items?itemName=kokororin.vscode-phpfmt)
+14. [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+15. [Polacode](https://marketplace.visualstudio.com/items?itemName=pnp.polacode)
+16. [Settings Sync](https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync)
 
 #### Terminal
 
