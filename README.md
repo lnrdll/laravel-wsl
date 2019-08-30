@@ -101,7 +101,7 @@ Another options is to use the [Remote WSL](https://code.visualstudio.com/remote-
 
 #### Terminal
 
-To configure the VSCode to use the WSL environment, you'll have to update the user's profile settings.
+To configure the VSCode Shell to use the WSL environment, you'll have to update the user's profile settings.
 
 * `File -> Preferences -> Settings`
 
