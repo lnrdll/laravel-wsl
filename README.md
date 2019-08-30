@@ -62,22 +62,17 @@ composer create-project --prefer-dist laravel/laravel blog
 
 Composer will create a `blog` folder will all the boilerplate. You should be able to access it at: ``http://blog.test``.
 
-### VSCode
+### VS Code
 
 #### PHP
 
-To get all the VSCode goodness to work with PHP on your Windows box, you need to download PHP and configure VS Code to use it.
+To get all the VS Code goodness to work with PHP on your Windows box, you need to download the extension [Remote WSL](https://code.visualstudio.com/remote-tutorials/wsl/run-in-wsl). VS Code will add itself to your `%PATH%`, so from the WSL console you can type `code .` to open VS Code on that folder. If for some reason, VS Code is not in your path, you can modify your `~/.bashrc` and add VS Code to your path. By default, VS Code is installed under `C:\users\{username}\AppData\Local\Programs\Microsoft VS Code`.
 
-1. Download PHP and explode the package somewhere on your Windows machine
-2. Edit your VS Code settings and point the `php.validate.executablePath` and `php.executablePath` settings to the path of the `php.exe` you just exploded:
+Add this line to your path:
 
 ```
-"php.validate.executablePath":"C:\\Users\\<username>\\php\\php.exe"
+export PATH=$PATH:/mnt/c/Users/{username}/AppData/Local/Programs/Microsoft VS Code/bin"
 ```
-
-3. Restart VS Code
-
-Another options is to use the [Remote WSL](https://code.visualstudio.com/remote-tutorials/wsl/run-in-wsl) plugin for VSCode.
 
 #### Extensions
 
@@ -100,7 +95,7 @@ Another options is to use the [Remote WSL](https://code.visualstudio.com/remote-
 
 #### Terminal
 
-To configure the VSCode Shell to use the WSL environment, you'll have to update the user's profile settings.
+In case you need to configure VS Code Shell to use the WSL environment, you'll have to update the user's profile settings.
 
 * `File -> Preferences -> Settings`
 
