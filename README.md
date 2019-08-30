@@ -72,8 +72,7 @@ To get all the VSCode goodness to work with PHP on your Windows box, you need to
 2. Edit your VS Code settings and point the `php.validate.executablePath` and `php.executablePath` settings to the path of the `php.exe` you just exploded:
 
 ```
-"php.validate.executablePath":"C:\\Users\\<username>\\php\\php.exe",
-"php.executablePath":"C:\\Users\\<username>\\php\\php.exe"
+"php.validate.executablePath":"C:\\Users\\<username>\\php\\php.exe"
 ```
 
 3. Restart VS Code
