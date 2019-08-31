@@ -4,7 +4,7 @@
 #
 #	FILE: bootstrap.sh
 #
-#	DESCRIPTION: Bootstrap Laravel Dev Environment for Debian/Ubuntu dists
+#	DESCRIPTION: Bootstrap Laravel Dev Environment for WSL Debian
 #
 #	LICENSE: Apache 2.0
 #
@@ -21,6 +21,14 @@ PHP="7.3"
 #-------------------------------------------------------------------------------------
 __check_command_exists() {
     command -v "$1" > /dev/null 2>&1
+}
+
+#---  FUNCTION  ----------------------------------------------------------------------
+#          NAME:  __check_debian
+#   DESCRIPTION:  Check if a command exists.
+#-------------------------------------------------------------------------------------
+__check_debian() {
+    cat /etc/os-release | grep -v grep | grep Debian > /dev/null 2>&1
 }
 
 #---  FUNCTION  ----------------------------------------------------------------------
@@ -67,6 +75,16 @@ function echoerror() {
 function echowarn() {
     echo -e "${WC}[ ${YC}WARN${WC}  ] $@"
 }
+
+#-------------------------------------------------------------------------------------
+#  Simple warning notification and validation
+#-------------------------------------------------------------------------------------
+if [ __check_debian ]; then
+    echowarn "This script has only been tested on a Debian system. Run it at your own discretion."
+fi
+
+echowarn "This setup is NOT suited for production deployments.\n"
+sleep 5
 
 #-------------------------------------------------------------------------------------
 # Update local OS
@@ -155,6 +173,7 @@ echoinfo "Install valet"
 echoinfo "Install Mariadb Server"
 sudo apt-get install -qq mariadb-server &> /dev/null
 
+echoinfo "Configure Mariadb Server"
 sudo debconf-set-selections <<< "maria-db mysql-server/root_password password "
 sudo debconf-set-selections <<< "maria-db mysql-server/root_password_again password "
 
@@ -229,7 +248,7 @@ fi
 #-------------------------------------------------------------------------------------
 # VIM
 #-------------------------------------------------------------------------------------
-echoinfo "Install and configure vim"
+echoinfo "Update vim configuration"
 mkdir -p ~/.vim/colors
 curl -o ~/.vim/colors/gruvbox.vim -O https://raw.githubusercontent.com/morhetz/gruvbox/master/colors/gruvbox.vim &> /dev/null
 cat >> ~/.vimrc << EOF
