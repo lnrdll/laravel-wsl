@@ -1,43 +1,108 @@
 #! /bin/bash
-#
-#==============================================================================
-#
-###     Laravel Dev Environment Bootstrap
-#
-#==============================================================================
 
+#====================================================================================
+#
+#	FILE: bootstrap.sh
+#
+#	DESCRIPTION: Bootstrap Laravel Dev Environment for Debian/Ubuntu dists
+#
+#	LICENSE: Apache 2.0
+#
+#====================================================================================
+set -o nounset			# treat unset variables as an error
+set -o errexit			# exit script when command fails
+
+# PHP Version to install
 PHP="7.3"
 
-#
-# format output
-#
-function output ()
-{
-
-local HOSTNAME=$(hostname)
-GREEN="\e[1;32m"
-YELLOW="\e[1;33m"
-RESET="\e[0m"
-echo -e "${YELLOW}==> ${GREEN}$HOSTNAME: ${RESET}$@ ..."
-
+#---  FUNCTION  ----------------------------------------------------------------------
+#          NAME:  __check_command_exists
+#   DESCRIPTION:  Check if a command exists.
+#-------------------------------------------------------------------------------------
+__check_command_exists() {
+    command -v "$1" > /dev/null 2>&1
 }
 
-#
-# Boostrap
-#
-output "Update OS"
+#---  FUNCTION  ----------------------------------------------------------------------
+#          NAME:  __check_service_running
+#   DESCRIPTION:  Check if a given service is running.
+#-------------------------------------------------------------------------------------
+__check_service_running() {
+    ps -ef | grep -v grep | grep "$1" > /dev/null 2>&1
+}
+
+#---  FUNCTION  ----------------------------------------------------------------------
+#          NAME:  __set_colors  
+#   DESCRIPTION:  Set terminal colors
+#-------------------------------------------------------------------------------------
+__set_colors() {
+    RC="\e[1;31m"
+    GC="\e[1;32m"
+    YC="\e[1;33m"
+    BC="\e[1;34m"
+    WC="\e[0m"
+}
+__set_colors
+
+#---  FUNCTION  ----------------------------------------------------------------------
+#          NAME:  echoinfo  
+#   DESCRIPTION:  format output info
+#-------------------------------------------------------------------------------------
+function echoinfo() {
+    echo -e "${WC}[ ${GC}INFO${WC}  ] $@"
+}
+
+#---  FUNCTION  ----------------------------------------------------------------------
+#          NAME:  echoerror  
+#   DESCRIPTION:  format output error
+#-------------------------------------------------------------------------------------
+function echoerror() {
+    echo -e "${WC}[ ${RC}ERROR${WC} ] $@"
+}
+
+#---  FUNCTION  ----------------------------------------------------------------------
+#          NAME:  echowarn  
+#   DESCRIPTION:  format output warn
+#-------------------------------------------------------------------------------------
+function echowarn() {
+    echo -e "${WC}[ ${YC}WARN${WC}  ] $@"
+}
+
+#-------------------------------------------------------------------------------------
+# Update local OS
+#-------------------------------------------------------------------------------------
+echoinfo "Update OS"
 sudo apt-get update -y &> /dev/null
 sudo apt-get upgrade -y &> /dev/null
 
-output "Install PHP and supporting libraries"
-sudo apt-get install -y php-xdebug php-fpm php-mysql php$PHP-cli php$PHP-curl php$PHP-mbstring php$PHP-xml php$PHP-zip php$PHP-intl curl git unzip php-cli network-manager libnss3-tools jq xsel &> /dev/null
+#-------------------------------------------------------------------------------------
+# Install OS packages
+#-------------------------------------------------------------------------------------
+echoinfo "Install PHP and supporting libraries"
+sudo apt-get install -y php-xdebug \
+                        php-fpm \
+                        php-mysql \
+                        php$PHP-cli \
+                        php$PHP-curl \
+                        php$PHP-mbstring \
+                        php$PHP-xml \
+                        php$PHP-zip \
+                        php$PHP-intl \
+                        curl git unzip \
+                        php-cli \
+                        network-manager \
+                        libnss3-tools \
+                        jq xsel vim &> /dev/null
 
-output "Download and install composer"
+#-------------------------------------------------------------------------------------
+# Composer
+#-------------------------------------------------------------------------------------
+echoinfo "Download and install composer"
 cd ~
 curl -sS https://getcomposer.org/installer -o composer-setup.php &> /dev/null
 sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer &> /dev/null
 
-output "Configure and update composer"
+echoinfo "Configure and update composer"
 mkdir ~/.composer
 sudo cat > ~/.composer/composer.json << EOF
 {
@@ -53,16 +118,41 @@ sudo cat > ~/.composer/composer.json << EOF
 }
 EOF
 sudo chown -R $USER ~/.composer
+
+# check if composer command exists
+if ! __check_command_exists composer; then
+    echoerror "Command 'composer' doesn't exist. Make sure it was correctly installed."
+    exit 1
+fi
+
+# check if composer config exists
+if [ ! -f "~/.composer/composer.json" ]; then
+    echoerror "Composer configuration file doesn't exist."
+    exit 1
+fi
+
 composer global update &> /dev/null
 
 cat >> ~/.bashrc << EOF
 export PATH="$PATH:$HOME/.composer/vendor/bin"
 EOF
 
-output "Install valet"
+#-------------------------------------------------------------------------------------
+# Valet
+#-------------------------------------------------------------------------------------
+# check valet command exists
+if [ ! -f "~/.composer/vendor/bin/valet" ]; then
+    echoerror "Valet command doesn't exist. Review your composer install."
+    exit 1
+fi
+
+echoinfo "Install valet"
 ~/.composer/vendor/bin/valet install &> /dev/null
 
-output "Install Mariadb Server"
+#-------------------------------------------------------------------------------------
+# Database
+#-------------------------------------------------------------------------------------
+echoinfo "Install Mariadb Server"
 sudo apt-get install -qq mariadb-server &> /dev/null
 
 sudo debconf-set-selections <<< "maria-db mysql-server/root_password password "
@@ -80,14 +170,30 @@ Q4="flush privileges;"
 SQL="${Q1}${Q2}${Q3}${Q4}"
 
 sudo $MYSQL -uroot -e "$SQL"
-sudo service mysql restart
+sudo service mysql restart &> /dev/null
 
-output "Install Redis Server"
+if ! __check_command_exists mysql; then
+    echoerror "MYSQL couldn't be started. Review MySQL logs."
+fi
+
+#-------------------------------------------------------------------------------------
+# Redis
+#-------------------------------------------------------------------------------------
+echoinfo "Install Redis Server"
 sudo apt-get install -y redis-server &> /dev/null
-sudo service redis-server start
+sudo service redis-server start &> /dev/null
 
-output "Create startup script"
-cat > ~/ctl-services.sh << EOF
+if ! __check_command_exists redis-server; then
+    echoerror "Redis server couldn't be started. Review Redis logs."
+fi
+
+#-------------------------------------------------------------------------------------
+# CTL Services
+#-------------------------------------------------------------------------------------
+echoinfo "Create startup script"
+SCRIPT_FILE="ctl-services.sh"
+
+cat > ~/"${SCRIPT_FILE}" << EOF
 #!/bin/bash
 
 case "${1:-''}" in
@@ -114,10 +220,16 @@ do
 done
 EOF
 
-chmod +x ~/start-services.sh
+chmod +x ~/"${SCRIPT_FILE}"
 
-output "Install and configure vim"
-sudo apt-get install -y vim &> /dev/null
+if [ ! -f "${SCRIPT_FILE}" ]; then
+    echoerror "${SCRIPT_NAME} was not created."
+fi
+
+#-------------------------------------------------------------------------------------
+# VIM
+#-------------------------------------------------------------------------------------
+echoinfo "Install and configure vim"
 mkdir -p ~/.vim/colors
 curl -o ~/.vim/colors/gruvbox.vim -O https://raw.githubusercontent.com/morhetz/gruvbox/master/colors/gruvbox.vim &> /dev/null
 cat >> ~/.vimrc << EOF
@@ -138,12 +250,15 @@ EOF
 echo "alias vi=vim" >> ~/.bashrc
 source ~/.bashrc
 
-output "Configure xdebug"
+#-------------------------------------------------------------------------------------
+# XDEBUG
+#-------------------------------------------------------------------------------------
+echoinfo "Configure xdebug"
 cat << EOF | sudo tee -a /etc/php/$PHP/fpm/conf.d/20-xdebug.ini &> /dev/null
 xdebug.default_enable=1
 xdebug.remote_enable=1
 xdebug.remote_connect_back=1
-xdebug.remote_port = 9001
+xdebug.remote_port=9001
 xdebug.scream=0
 xdebug.cli_color=1
 xdebug.show_local_vars=1
@@ -151,3 +266,7 @@ xdebug.remote_autostart=1
 EOF
 
 sudo service php$PHP-fpm restart &> /dev/null
+
+if ! __check_command_exists php$PHP-fpm ; then
+    echoerror "php-fpm service couldn't be started."
+fi
