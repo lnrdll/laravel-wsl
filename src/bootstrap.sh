@@ -173,7 +173,7 @@ sudo $MYSQL -uroot -e "$SQL"
 sudo service mysql restart &> /dev/null
 
 if ! __check_command_exists mysql; then
-    echoerror "MYSQL couldn't be started. Review MySQL logs."
+    echowarn "MYSQL couldn't be started. Review MySQL logs."
 fi
 
 #-------------------------------------------------------------------------------------
@@ -184,7 +184,7 @@ sudo apt-get install -y redis-server &> /dev/null
 sudo service redis-server start &> /dev/null
 
 if ! __check_command_exists redis-server; then
-    echoerror "Redis server couldn't be started. Review Redis logs."
+    echowarn "Redis server couldn't be started. Review Redis logs."
 fi
 
 #-------------------------------------------------------------------------------------
@@ -223,7 +223,7 @@ EOF
 chmod +x ~/"${SCRIPT_FILE}"
 
 if [ ! -f "${SCRIPT_FILE}" ]; then
-    echoerror "${SCRIPT_NAME} was not created."
+    echowarn "${SCRIPT_NAME} was not created."
 fi
 
 #-------------------------------------------------------------------------------------
@@ -268,5 +268,5 @@ EOF
 sudo service php$PHP-fpm restart &> /dev/null
 
 if ! __check_command_exists php$PHP-fpm ; then
-    echoerror "php-fpm service couldn't be started."
+    echowarn "php-fpm service couldn't be started."
 fi
