@@ -149,7 +149,11 @@ if [ ! -f "~/.composer/composer.json" ]; then
     exit 1
 fi
 
+echoinfo "Update composer"
 composer global update &> /dev/null
+
+echoinfo "Setup Laravel Installer"
+composer global require laravel/installer &> /dev/null
 
 cat >> ~/.bashrc << EOF
 export PATH="$PATH:$HOME/.composer/vendor/bin"
