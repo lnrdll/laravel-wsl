@@ -195,7 +195,7 @@ SQL="${Q1}${Q2}${Q3}${Q4}"
 sudo $MYSQL -uroot -e "$SQL"
 sudo service mysql restart &> /dev/null
 
-if ! __check_command_exists mysql; then
+if ! __check_service_running mysql; then
     echowarn "MYSQL couldn't be started. Review MySQL logs."
 fi
 
@@ -206,7 +206,7 @@ echoinfo "Install Redis Server"
 sudo apt-get install -y redis-server &> /dev/null
 sudo service redis-server start &> /dev/null
 
-if ! __check_command_exists redis-server; then
+if ! __check_service_running redis-server; then
     echowarn "Redis server couldn't be started. Review Redis logs."
 fi
 
@@ -290,6 +290,6 @@ EOF
 
 sudo service php$PHP-fpm restart &> /dev/null
 
-if ! __check_command_exists php$PHP-fpm ; then
+if ! __check_service_running php$PHP-fpm ; then
     echowarn "php-fpm service couldn't be started."
 fi
