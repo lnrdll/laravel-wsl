@@ -25,7 +25,7 @@ __check_command_exists() {
 
 #---  FUNCTION  ----------------------------------------------------------------------
 #          NAME:  __check_debian
-#   DESCRIPTION:  Check if a command exists.
+#   DESCRIPTION:  Check if is Debian.
 #-------------------------------------------------------------------------------------
 __check_debian() {
     cat /etc/os-release | grep -v grep | grep Debian > /dev/null 2>&1
@@ -106,6 +106,9 @@ sudo apt-get install -y php-xdebug \
                         php$PHP-xml \
                         php$PHP-zip \
                         php$PHP-intl \
+                        php$PHP-bcmath \
+                        php$PHP-ctype \
+                        php$PHP-json \
                         curl git unzip \
                         php-cli \
                         network-manager \
