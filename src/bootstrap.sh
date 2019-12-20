@@ -14,6 +14,7 @@ set -o errexit			# exit script when command fails
 
 # PHP Version to install
 PHP="7.3"
+NODEJS="13"
 
 #---  FUNCTION  ----------------------------------------------------------------------
 #          NAME:  __check_command_exists
@@ -114,6 +115,15 @@ sudo apt-get install -y php-xdebug \
                         network-manager \
                         libnss3-tools \
                         jq xsel vim &> /dev/null
+
+#-------------------------------------------------------------------------------------
+# NodeJs + NPM
+#-------------------------------------------------------------------------------------
+
+# TODO
+# https://github.com/nodesource/distributions/blob/master/README.md
+# curl -L https://npmjs.org/install.sh | sudo sh
+
 
 #-------------------------------------------------------------------------------------
 # Composer
