@@ -13,7 +13,7 @@ set -o nounset			# treat unset variables as an error
 set -o errexit			# exit script when command fails
 
 # PHP Version to install
-PHP="7.3"
+PHP="7.4"
 NODEJS="13"
 
 #---  FUNCTION  ----------------------------------------------------------------------
@@ -102,6 +102,7 @@ sudo apt-get install -y php-xdebug \
                         php-fpm \
                         php-mysql \
                         php$PHP-cli \
+                        php$PHP-sqlite \
                         php$PHP-curl \
                         php$PHP-mbstring \
                         php$PHP-xml \
