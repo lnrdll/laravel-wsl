@@ -123,8 +123,8 @@ sudo apt-get install -y php-xdebug \
 
 # TODO
 # https://github.com/nodesource/distributions/blob/master/README.md
-# curl -L https://npmjs.org/install.sh | sudo sh
-
+curl -sL https://deb.nodesource.com/setup_lts.x | sudo -E bash - &> /dev/null
+sudo apt-get install -y nodejs &> /dev/null
 
 #-------------------------------------------------------------------------------------
 # Composer
@@ -167,7 +167,7 @@ echoinfo "Update composer"
 composer global update &> /dev/null
 
 echoinfo "Install composer prestissimo"
-composer global require hirak/prestissimo %> /dev/null
+composer global require hirak/prestissimo &> /dev/null
 
 echoinfo "Setup Laravel Installer"
 composer global require laravel/installer &> /dev/null
@@ -253,7 +253,7 @@ for i in "${SERVICES[@]}"
 do
   if [ $i == 'php-fpm' ]
     then
-        sudo service php7.3-fpm $1
+        sudo service php$PHP-fpm $1
     else
         sudo service $i $1
   fi
