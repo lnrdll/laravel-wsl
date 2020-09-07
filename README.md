@@ -15,7 +15,7 @@ Follow the instructions in this [documentation](https://docs.microsoft.com/en-us
 Once your WSL is up and running, download the bootstrap script and run it on your WSL. It will perform the following tasks:
 
 1. Update Linux
-2. Install and configure PHP 7.3
+2. Install and configure PHP 7.4
 3. Install MariaDB
 4. Install Redis
 5. Install composer and valet
