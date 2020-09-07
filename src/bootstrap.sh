@@ -14,7 +14,7 @@ set -o errexit			# exit script when command fails
 
 # PHP Version to install
 PHP="7.4"
-NODEJS="13"
+NODEJS="lts"
 
 #---  FUNCTION  ----------------------------------------------------------------------
 #          NAME:  __check_command_exists
@@ -123,7 +123,7 @@ sudo apt-get install -y php-xdebug \
 
 # TODO
 # https://github.com/nodesource/distributions/blob/master/README.md
-curl -sL https://deb.nodesource.com/setup_lts.x | sudo -E bash - &> /dev/null
+curl -sL https://deb.nodesource.com/setup_$NODEJS.x | sudo -E bash - &> /dev/null
 sudo apt-get install -y nodejs &> /dev/null
 
 #-------------------------------------------------------------------------------------
